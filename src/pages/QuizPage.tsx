@@ -21,7 +21,7 @@ export default function QuizPage() {
   );
 
   // hardcoded to hiragana map only for now
-  // TODO: extend and make compatible with multiple maps
+  // TODO: extend and make compatible with multiple maps and combinations
   const kanaMap = hiraganaData;
 
   const [currentQuestion, setCurrentQuestion] = useState<KanaQuestion | null>(
