@@ -10,19 +10,11 @@ export const getAllCharacters = (
   selectedGroups: KanaGroupKey[],
   kanaMap: KanaMap
 ): KanaEntry[] => {
-  const allCharacters: Array<{ kana: KanaGroupKey; romanji: string }> = [];
+  const allCharacters: Array<KanaEntry> = [];
   selectedGroups.forEach((row) => {
-    // console.log(
-    //   "kanaData[row as keyof typeof kanaData]",
-    //   kanaMap[row as keyof typeof kanaMap],
-    //   "row as keyof typeof kanaMap",
-    //   row as keyof typeof kanaMap
-    // );
-
-    // TODO: Fix type
-    if (kanaMap[row as keyof typeof kanaMap]) {
-      allCharacters.push(...kanaMap[row as keyof typeof kanaMap]);
-    }
+    const entries = kanaMap[row as keyof typeof kanaMap];
+    if (!entries) return;
+    allCharacters.push(...entries);
   });
   return allCharacters;
 };

@@ -1,16 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import { generateQuestion } from "../components/quiz/utils";
 import type { RootState } from "../app/store";
 import { hiraganaData } from "../resources/hiraganaData";
-import { Fab, Grid, Typography } from "@mui/material";
-import { setQuizMode, updateScore } from "../app/kanaSlice";
+import { Fab } from "@mui/material";
+import { clearGroups, setQuizMode, updateScore } from "../app/kanaSlice";
 import { useCallback, useEffect, useState } from "react";
 import type { KanaQuestion } from "../types/types";
-import AnswerButton from "../components/quiz/AnswerButton";
 import FeedbackBar from "../components/quiz/FeedbackBar";
 import ScoreIndicator from "../components/quiz/ScoreIndicator";
+import QuizPageLayout from "./QuizPageLayout";
 
 export default function QuizPage() {
   const dispatch = useDispatch();
@@ -33,14 +33,14 @@ export default function QuizPage() {
     setCurrentQuestion(currQuestion);
   }, []);
 
-  const { kana, answer, options } = currentQuestion || {
+  const { kana, answer } = currentQuestion || {
     kana: "",
     answer: "",
-    options: [],
   };
 
   const onClickBack = () => {
     dispatch(setQuizMode(false));
+    dispatch(clearGroups());
   };
 
   //TODO: support combination of hiragana, katakana etc
@@ -63,34 +63,29 @@ export default function QuizPage() {
     setSelectedAnswer(null);
   }, [kanaMap, selectedKanaGroups]);
 
-  const choices = options.map((option) => (
-    <Grid key={`answer-${option}`} size={4}>
-      <AnswerButton option={option} onAnswer={onSelectAnswer} />
-    </Grid>
-  ));
+  const feedbackBar = (
+    <FeedbackBar kana={kana} choice={selectedAnswer} correctAnswer={answer} />
+  );
+
+  const nextButton = (
+    <Fab
+      variant="extended"
+      onClick={onClickNext}
+      sx={selectedAnswer ? { visibility: "visible" } : { visibility: "hidden" }}
+    >
+      Next
+    </Fab>
+  );
 
   return (
-    <>
-      <Fab variant="extended" onClick={onClickBack}>
-        {/*TODO: fix icons package install*/}
-        {/* <ArrowBackIcon /> */}
-        Back to Selection
-      </Fab>
-      <ScoreIndicator />
-
-      <Typography>{kana}</Typography>
-      <Grid container spacing={2}>
-        {choices}
-      </Grid>
-
-      {selectedAnswer && (
-        <>
-          <FeedbackBar success={selectedAnswer === answer} />
-          <Fab variant="extended" onClick={onClickNext}>
-            Next
-          </Fab>
-        </>
-      )}
-    </>
+    <QuizPageLayout
+      currentQuestion={currentQuestion}
+      onClickBack={onClickBack}
+      onClickBackIcon={<ArrowBackIcon />}
+      scoreIndicator={<ScoreIndicator />}
+      onSelectAnswer={onSelectAnswer}
+      feedbackBar={feedbackBar}
+      nextButton={nextButton}
+    />
   );
 }

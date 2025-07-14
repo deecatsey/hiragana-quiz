@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Fab, Typography } from "@mui/material";
 import { store } from "../../app/store";
 import { useDispatch } from "react-redux";
 import { resetScore, setQuizMode } from "../../app/kanaSlice";
@@ -16,8 +16,8 @@ export default function StartQuizButton() {
   };
 
   return (
-    <Button variant="contained" size="medium" onClick={onClick}>
+    <Fab variant="extended" color="primary" size="medium" onClick={onClick}>
       <Typography>Start Quiz</Typography>
-    </Button>
+    </Fab>
   );
 }

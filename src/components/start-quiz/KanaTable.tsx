@@ -1,7 +1,6 @@
-import type { KanaGroupKey, KanaMap } from "../../resources/hiraganaData";
 import KanaTableLayout from "./KanaTableLayout";
 import KanaRow from "./KanaRow";
-import StartQuizButton from "./StartQuizButton";
+import type { KanaGroupKey, KanaMap } from "../../types/types";
 
 export type KanaTableProps = { title: string; kanaData: KanaMap };
 
@@ -14,9 +13,5 @@ export default function KanaTable({ title, kanaData }: KanaTableProps) {
     />
   ));
 
-  return (
-    <KanaTableLayout title={title} kanaNodes={kanaRows}>
-      <StartQuizButton />
-    </KanaTableLayout>
-  );
+  return <KanaTableLayout title={title} kanaNodes={kanaRows} />;
 }
