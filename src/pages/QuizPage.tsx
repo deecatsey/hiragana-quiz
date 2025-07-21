@@ -29,23 +29,14 @@ export default function QuizPage() {
     (state: RootState) => state.kana.settings.systems
   );
 
-  // const systemKeys = Object.entries(selectedSystems)
-  //   .filter(([_, value]) => Boolean(value.checked))
-  //   .map(([key]) => key);
-
-  // TODO: extend and make compatible with multiple maps and combinations
-
   // HIRAGANA and/or KATAKANA
   const kanaMap = getKanaData(selectedTables, selectedSystems);
-
-  console.log(selectedSystems, kanaMap);
 
   const [currentQuestion, setCurrentQuestion] = useState<KanaQuestion | null>(
     null
   );
 
   useEffect(() => {
-    console.log();
     const currQuestion = generateQuestion(selectedKanaGroups, kanaMap);
     setCurrentQuestion(currQuestion);
   }, []);
@@ -60,7 +51,6 @@ export default function QuizPage() {
     dispatch(clearGroups());
   };
 
-  //TODO: support combination of hiragana, katakana etc
   const onSelectAnswer = useCallback(
     (choice: string) => {
       setSelectedAnswer(choice);

@@ -36,7 +36,6 @@ export const getKanaData = (
         ])
     );
   }
-  console.log("KanaData", KanaData);
 
   return KanaData;
 };

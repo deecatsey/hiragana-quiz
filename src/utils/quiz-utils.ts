@@ -1,4 +1,3 @@
-import { getInitialKanaGroups } from "../resources/kanaData";
 import type {
   KanaEntry,
   KanaGroupKey,
@@ -57,7 +56,9 @@ export const generateQuestion = (
   kanaMap: KanaMap
 ): KanaQuestion => {
   const kanaGroups =
-    selectedGroups.length > 0 ? selectedGroups : getInitialKanaGroups();
+    selectedGroups.length > 0
+      ? selectedGroups
+      : (Object.keys(kanaMap) as KanaGroupKey[]);
 
   const allCharacters = getAllCharacters(kanaGroups, kanaMap);
 
