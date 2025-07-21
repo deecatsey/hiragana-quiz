@@ -1,8 +1,8 @@
 // kana data organized by rows
 
-import type { KanaMap } from "../types/types";
+import type { KanaMap, KanaTableSettingsKey } from "../types/types";
 
-export const hiraganaData: KanaMap = {
+export const GojuonHiragana: KanaMap = {
   a: [
     { kana: "あ", romanji: "a" },
     { kana: "い", romanji: "i" },
@@ -66,11 +66,11 @@ export const hiraganaData: KanaMap = {
   ],
   wa: [
     { kana: "わ", romanji: "wa" },
-    { kana: "ん", romanji: "n" },
+    { kana: "を", romanji: "wo" },
   ],
 };
 
-export const gojuonDiacriticsHiragana: KanaMap = {
+export const GojuonDiacriticsHiragana: KanaMap = {
   ga: [
     { kana: "が", romanji: "ga" },
     { kana: "ぎ", romanji: "gi" },
@@ -111,3 +111,11 @@ export const gojuonDiacriticsHiragana: KanaMap = {
 export const HatsuonHiragana: KanaMap = {
   n: [{ kana: "ん", romanji: "n" }],
 };
+
+export const HiraganaLookup: { [key in KanaTableSettingsKey]: KanaMap } = {
+  gojuon: GojuonHiragana,
+  diacritics: GojuonDiacriticsHiragana,
+  diphtongs: HatsuonHiragana,
+};
+
+export const HiraganaData: KanaMap = { ...GojuonHiragana, ...HatsuonHiragana };

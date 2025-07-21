@@ -8,15 +8,12 @@ export default function StartQuizButton() {
   const onClick = () => {
     console.log("Start quiz", store.getState().kana.selectedKanaGroups);
 
-    if (store.getState().kana.selectedKanaGroups.length === 0) {
-      return;
-    }
     dispatch(setQuizMode(true));
     dispatch(resetScore());
   };
 
   return (
-    <Fab variant="extended" color="primary" size="medium" onClick={onClick}>
+    <Fab variant="extended" color="primary" size="large" onClick={onClick}>
       <Typography>Start Quiz</Typography>
     </Fab>
   );

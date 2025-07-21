@@ -13,6 +13,8 @@ export type KanaEntry =
   // | KatakanaEntry
   { kana: string; romanji: string };
 
+export type KanaSystem = "Hiragana" | "Katakana";
+
 export type GojuonBasic =
   | "a"
   | "ka"
@@ -57,4 +59,13 @@ export type KanaQuestion = {
 export type Score = {
   correct: number;
   wrong: number;
+};
+
+export type KanaTableSettingsKey = "gojuon" | "diacritics" | "diphtongs";
+
+export type KanaSystemSettingsKey = "hiragana" | "katakana";
+
+export type KanaSetting = {
+  label: string;
+  checked?: boolean;
 };

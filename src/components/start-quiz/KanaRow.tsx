@@ -30,7 +30,13 @@ export default function KanaRow({ kanaGroup, kanaEntries }: KanaRowProps) {
       onClickRow={toggleSelection}
       isSelected={isSelected}
     >
-      <Checkbox checked={isSelected} />
+      <Checkbox
+        checked={isSelected}
+        sx={{
+          color: "primary.contrastText",
+          ml: 1,
+        }}
+      />
     </KanaRowLayout>
   );
 }

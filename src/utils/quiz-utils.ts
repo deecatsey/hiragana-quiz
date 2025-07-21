@@ -3,7 +3,7 @@ import type {
   KanaGroupKey,
   KanaMap,
   KanaQuestion,
-} from "../../types/types";
+} from "../types/types";
 
 // Adjust for katakana etc
 export const getAllCharacters = (

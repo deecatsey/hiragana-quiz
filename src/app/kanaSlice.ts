@@ -1,17 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { KanaGroupKey, Score } from "../types/types";
+import type {
+  KanaTableSettingsPayload,
+  KanaSettingsState,
+  KanaState,
+  KanaSystemSettingsPayload,
+} from "./types";
+import { KanaData } from "../resources/kanaData";
 
-export interface KanaState {
-  quizMode: boolean;
-  selectedKanaGroups: KanaGroupKey[];
-  score: Score;
-}
+const getInitialKanaGroups = (): KanaGroupKey[] => {
+  return Object.keys(KanaData) as KanaGroupKey[]; // Or any logic you need
+};
+
+export const initialKanaSettings: KanaSettingsState = {
+  tables: {
+    gojuon: { label: "Gojuon", checked: true },
+    diacritics: { label: "Gojuon diacritics" },
+    diphtongs: { label: "Diphtongs" },
+  },
+  systems: {
+    hiragana: { label: "Hiragana", checked: true },
+    katakana: { label: "Katakana" },
+  },
+};
 
 const initialState: KanaState = {
   quizMode: false,
-  selectedKanaGroups: [],
+  selectedKanaGroups: getInitialKanaGroups(),
   score: { correct: 0, wrong: 0 },
+  settings: initialKanaSettings,
 };
 
 export const kanaSlice = createSlice({
@@ -23,18 +41,30 @@ export const kanaSlice = createSlice({
     },
     addKanaGroup: (state, action: PayloadAction<KanaGroupKey>) => {
       state.selectedKanaGroups.push(action.payload);
-      console.log("State is now", action.payload, [
-        ...state.selectedKanaGroups,
-      ]);
     },
-
     removeKanaGroup: (state, action: PayloadAction<KanaGroupKey>) => {
       state.selectedKanaGroups = state.selectedKanaGroups.filter(
         (kanaGroup) => kanaGroup !== action.payload
       );
     },
     clearGroups: (state) => {
-      state.selectedKanaGroups = [];
+      state.selectedKanaGroups = getInitialKanaGroups();
+    },
+    toggleKanaTableSetting: (
+      state,
+      action: PayloadAction<KanaTableSettingsPayload>
+    ) => {
+      const { key, checked } = action.payload;
+      if (!key) return;
+      state.settings.tables[key].checked = !!checked;
+    },
+    toggleKanaSystemSetting: (
+      state,
+      action: PayloadAction<KanaSystemSettingsPayload>
+    ) => {
+      const { key, checked } = action.payload;
+      if (!key) return;
+      state.settings.systems[key].checked = !!checked;
     },
     updateScore: (state, action: PayloadAction<Partial<Score>>) => {
       state.score.correct += Math.max(0, action.payload.correct || 0);
@@ -53,6 +83,8 @@ export const {
   addKanaGroup,
   removeKanaGroup,
   clearGroups,
+  toggleKanaTableSetting,
+  toggleKanaSystemSetting,
   updateScore,
   resetScore,
 } = kanaSlice.actions;

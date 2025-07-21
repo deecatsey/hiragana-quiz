@@ -1,6 +1,6 @@
-import type { KanaMap } from "../types/types";
+import type { KanaMap, KanaTableSettingsKey } from "../types/types";
 
-export const gojuonBasicKatakana: KanaMap = {
+export const GojuonKatakana: KanaMap = {
   a: [
     { kana: "ア", romanji: "a" },
     { kana: "イ", romanji: "i" },
@@ -52,9 +52,7 @@ export const gojuonBasicKatakana: KanaMap = {
   ],
   ya: [
     { kana: "ヤ", romanji: "ya" },
-    { kana: "", romanji: "" },
     { kana: "ユ", romanji: "yu" },
-    { kana: "", romanji: "" },
     { kana: "ヨ", romanji: "yo" },
   ],
   ra: [
@@ -66,14 +64,12 @@ export const gojuonBasicKatakana: KanaMap = {
   ],
   wa: [
     { kana: "ワ", romanji: "wa" },
-    { kana: "", romanji: "" },
-    { kana: "", romanji: "" },
-    { kana: "", romanji: "" },
+
     { kana: "ヲ", romanji: "wo" },
   ],
 };
 
-export const gojuonDiacriticsKatakana: KanaMap = {
+export const GojuonDiacriticsKatakana: KanaMap = {
   ga: [
     { kana: "ガ", romanji: "ga" },
     { kana: "ギ", romanji: "gi" },
@@ -114,3 +110,11 @@ export const gojuonDiacriticsKatakana: KanaMap = {
 export const HatsuonKatakana: KanaMap = {
   n: [{ kana: "ン", romanji: "n" }],
 };
+
+export const KatakanaLookup: { [key in KanaTableSettingsKey]: KanaMap } = {
+  gojuon: GojuonKatakana,
+  diacritics: GojuonDiacriticsKatakana,
+  diphtongs: HatsuonKatakana,
+};
+
+export const KatakanaData: KanaMap = { ...GojuonKatakana, ...HatsuonKatakana };

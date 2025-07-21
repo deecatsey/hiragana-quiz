@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import KanaTable from "./KanaTable";
 import type { RootState } from "../../app/store";
 import type { KanaTableSettingsKey } from "../../types/types";
-import { HiraganaLookup } from "../../resources/hiraganaData";
+import { KatakanaLookup } from "../../resources/katakanaData";
 import { Typography } from "@mui/material";
 
-export function HiraganaTable() {
+export function KatakanaTable() {
   const kanaSettings = useSelector(
     (state: RootState) => state.kana.settings.tables
   );
@@ -22,7 +22,7 @@ export function HiraganaTable() {
 
   // filtered based on state
   // const tables = checkedSettingsKeys.map((settingsKey) => (
-  //   <KanaTable title="Hiragana" kanaData={HiraganaLookup[settingsKey]} />
+  //   <KanaTable title="Katakana" kanaData={KatakanaLookup[settingsKey]} />
   // ));
 
   const tables = Object.entries(kanaSettings).map(([settingsKey, value]) => {
@@ -34,16 +34,16 @@ export function HiraganaTable() {
 
     return (
       <KanaTable
-        key={`hiragana-table-${settingsKey}`}
+        key={`Katakana-table-${settingsKey}`}
         title={label}
-        kanaData={HiraganaLookup[settingsKey as KanaTableSettingsKey]}
+        kanaData={KatakanaLookup[settingsKey as KanaTableSettingsKey]}
       />
     );
   });
 
   return (
     <>
-      <Typography variant="h3">Hiragana</Typography>
+      <Typography variant="h3">Katakana</Typography>
       {tables}
     </>
   );

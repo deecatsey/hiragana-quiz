@@ -35,6 +35,7 @@ export default function KanaRowLayout({
       sx={{
         ...selectedSx,
         justifyContent: "start",
+        p: 0,
         "&:focus": {
           outline: "none",
         },
@@ -44,12 +45,11 @@ export default function KanaRowLayout({
         direction="row"
         alignItems="center"
         justifyContent="start"
-        spacing={3}
-        p={2}
+        spacing={1}
       >
         {children}
         <Typography variant="h6">Row: {rowName}</Typography>
-        <Stack direction="row" flexWrap="wrap">
+        <Stack direction="row" flexWrap="wrap" p={1}>
           {kanaRow}
         </Stack>
       </Stack>

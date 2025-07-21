@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-import { generateQuestion } from "../components/quiz/utils";
+import { generateQuestion } from "../utils/quiz-utils";
 import type { RootState } from "../app/store";
-import { hiraganaData } from "../resources/hiraganaData";
 import { Fab } from "@mui/material";
 import { clearGroups, setQuizMode, updateScore } from "../app/kanaSlice";
 import { useCallback, useEffect, useState } from "react";
@@ -11,6 +11,7 @@ import type { KanaQuestion } from "../types/types";
 import FeedbackBar from "../components/quiz/FeedbackBar";
 import ScoreIndicator from "../components/quiz/ScoreIndicator";
 import QuizPageLayout from "./QuizPageLayout";
+import { getKanaData } from "../resources/kanaData";
 
 export default function QuizPage() {
   const dispatch = useDispatch();
@@ -19,10 +20,16 @@ export default function QuizPage() {
   const selectedKanaGroups = useSelector(
     (state: RootState) => state.kana.selectedKanaGroups
   );
+  const selectedSystems = useSelector(
+    (state: RootState) => state.kana.settings.systems
+  );
 
-  // hardcoded to hiragana map only for now
+  // const systemKeys = Object.entries(selectedSystems)
+  //   .filter(([_, value]) => Boolean(value.checked))
+  //   .map(([key]) => key);
+
   // TODO: extend and make compatible with multiple maps and combinations
-  const kanaMap = hiraganaData;
+  const kanaMap = getKanaData(selectedSystems);
 
   const [currentQuestion, setCurrentQuestion] = useState<KanaQuestion | null>(
     null
@@ -70,9 +77,11 @@ export default function QuizPage() {
   const nextButton = (
     <Fab
       variant="extended"
+      color="primary"
       onClick={onClickNext}
       sx={selectedAnswer ? { visibility: "visible" } : { visibility: "hidden" }}
     >
+      <ArrowForwardIcon />
       Next
     </Fab>
   );
@@ -86,6 +95,7 @@ export default function QuizPage() {
       onSelectAnswer={onSelectAnswer}
       feedbackBar={feedbackBar}
       nextButton={nextButton}
+      disableButtons={selectedAnswer !== null}
     />
   );
 }

@@ -5,8 +5,13 @@ import { Button, Typography } from "@mui/material";
 export type AnswerButtonProps = {
   option: string;
   onAnswer: (answer: string) => void;
+  disabled: boolean;
 };
-export default function AnswerButton({ option, onAnswer }: AnswerButtonProps) {
+export default function AnswerButton({
+  option,
+  onAnswer,
+  disabled,
+}: AnswerButtonProps) {
   // const buttonRef = useRef<HTMLButtonElement>(null);
 
   const onClick = () => {
@@ -15,8 +20,15 @@ export default function AnswerButton({ option, onAnswer }: AnswerButtonProps) {
   };
 
   return (
-    <Button /* ref={buttonRef}*/ variant="outlined" onClick={onClick}>
-      <Typography>{option}</Typography>
+    <Button
+      /* ref={buttonRef}*/ size="large"
+      variant="outlined"
+      color="primary"
+      disabled={disabled}
+      onClick={onClick}
+      sx={{ width: "100%", p: "1em", borderWidth: "0.25em" }}
+    >
+      <Typography variant="h4">{option}</Typography>
     </Button>
   );
 }

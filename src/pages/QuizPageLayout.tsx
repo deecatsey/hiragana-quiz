@@ -11,6 +11,7 @@ export type QuizPageLayoutProps = {
   feedbackBar: ReactNode;
   nextButton: ReactNode;
   onSelectAnswer: (choice: string) => void;
+  disableButtons: boolean;
 };
 
 export default function QuizPageLayout({
@@ -21,35 +22,43 @@ export default function QuizPageLayout({
   onSelectAnswer,
   feedbackBar,
   nextButton,
+  disableButtons,
 }: QuizPageLayoutProps) {
   const { kana, options } = currentQuestion || {
     kana: "",
     answer: "",
     options: [],
   };
+
   const choices = options.map((option) => (
     <Grid key={`answer-${option}`} size={4}>
-      <AnswerButton option={option} onAnswer={onSelectAnswer} />
+      <AnswerButton
+        option={option}
+        onAnswer={onSelectAnswer}
+        disabled={disableButtons}
+      />
     </Grid>
   ));
 
   return (
     <Stack spacing={3}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <Fab variant="extended" onClick={onClickBack}>
+        <Fab variant="extended" color="secondary" onClick={onClickBack}>
           {onClickBackIcon}
           Back to Selection
         </Fab>
         {scoreIndicator}
       </Stack>
 
-      <Typography variant="h2">{kana}</Typography>
+      <Typography variant="h1">{kana}</Typography>
       <Grid container spacing={2}>
         {choices}
       </Grid>
 
       {feedbackBar}
-      {nextButton}
+      <Stack direction="row" justifyContent="center">
+        {nextButton}
+      </Stack>
     </Stack>
   );
 }

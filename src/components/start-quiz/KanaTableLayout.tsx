@@ -13,9 +13,9 @@ export default function KanaTableLayout({
   children,
 }: KanaTableLayoutProps) {
   return (
-    <Stack spacing={2} m={2}>
-      <Typography variant="h3">{title}</Typography>
-      <Stack>{kanaNodes}</Stack>
+    <Stack spacing={2} m={2} width="100%" alignItems="start">
+      <Typography variant="h6">{title}</Typography>
+      <Stack spacing={1}>{kanaNodes}</Stack>
 
       {children}
     </Stack>
