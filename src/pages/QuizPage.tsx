@@ -20,6 +20,11 @@ export default function QuizPage() {
   const selectedKanaGroups = useSelector(
     (state: RootState) => state.kana.selectedKanaGroups
   );
+
+  const selectedTables = useSelector(
+    (state: RootState) => state.kana.settings.tables
+  );
+
   const selectedSystems = useSelector(
     (state: RootState) => state.kana.settings.systems
   );
@@ -29,13 +34,18 @@ export default function QuizPage() {
   //   .map(([key]) => key);
 
   // TODO: extend and make compatible with multiple maps and combinations
-  const kanaMap = getKanaData(selectedSystems);
+
+  // HIRAGANA and/or KATAKANA
+  const kanaMap = getKanaData(selectedTables, selectedSystems);
+
+  console.log(selectedSystems, kanaMap);
 
   const [currentQuestion, setCurrentQuestion] = useState<KanaQuestion | null>(
     null
   );
 
   useEffect(() => {
+    console.log();
     const currQuestion = generateQuestion(selectedKanaGroups, kanaMap);
     setCurrentQuestion(currQuestion);
   }, []);

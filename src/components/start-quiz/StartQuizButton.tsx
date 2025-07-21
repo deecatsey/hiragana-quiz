@@ -13,7 +13,13 @@ export default function StartQuizButton() {
   };
 
   return (
-    <Fab variant="extended" color="primary" size="large" onClick={onClick}>
+    <Fab
+      variant="extended"
+      color="primary"
+      size="large"
+      onClick={onClick}
+      sx={{ position: "fixed", bottom: 10 }}
+    >
       <Typography>Start Quiz</Typography>
     </Fab>
   );

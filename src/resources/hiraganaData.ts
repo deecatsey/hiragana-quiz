@@ -1,6 +1,10 @@
 // kana data organized by rows
 
-import type { KanaMap, KanaTableSettingsKey } from "../types/types";
+import type {
+  KanaMap,
+  KanaSetting,
+  KanaTableSettingsKey,
+} from "../types/types";
 
 export const GojuonHiragana: KanaMap = {
   a: [
@@ -119,3 +123,24 @@ export const HiraganaLookup: { [key in KanaTableSettingsKey]: KanaMap } = {
 };
 
 export const HiraganaData: KanaMap = { ...GojuonHiragana, ...HatsuonHiragana };
+
+export const getHiraganaData = (
+  tables: Record<KanaTableSettingsKey, KanaSetting>
+) => {
+  const tableKeys = Object.entries(tables)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    .filter(([_, value]) => Boolean(value.checked))
+    .map(([key]) => key);
+
+  let hiraganaData: KanaMap = {};
+
+  // REFACTOR!!!
+  tableKeys.forEach((key) => {
+    hiraganaData = {
+      ...hiraganaData,
+      ...(HiraganaLookup[key as KanaTableSettingsKey] ?? []),
+    };
+  });
+
+  return hiraganaData;
+};

@@ -7,11 +7,6 @@ import type {
   KanaState,
   KanaSystemSettingsPayload,
 } from "./types";
-import { KanaData } from "../resources/kanaData";
-
-const getInitialKanaGroups = (): KanaGroupKey[] => {
-  return Object.keys(KanaData) as KanaGroupKey[]; // Or any logic you need
-};
 
 export const initialKanaSettings: KanaSettingsState = {
   tables: {
@@ -27,7 +22,7 @@ export const initialKanaSettings: KanaSettingsState = {
 
 const initialState: KanaState = {
   quizMode: false,
-  selectedKanaGroups: getInitialKanaGroups(),
+  selectedKanaGroups: [], //getInitialKanaGroups(),
   score: { correct: 0, wrong: 0 },
   settings: initialKanaSettings,
 };
@@ -48,7 +43,7 @@ export const kanaSlice = createSlice({
       );
     },
     clearGroups: (state) => {
-      state.selectedKanaGroups = getInitialKanaGroups();
+      state.selectedKanaGroups = [];
     },
     toggleKanaTableSetting: (
       state,

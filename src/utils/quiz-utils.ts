@@ -1,3 +1,4 @@
+import { getInitialKanaGroups } from "../resources/kanaData";
 import type {
   KanaEntry,
   KanaGroupKey,
@@ -55,7 +56,10 @@ export const generateQuestion = (
   selectedGroups: KanaGroupKey[],
   kanaMap: KanaMap
 ): KanaQuestion => {
-  const allCharacters = getAllCharacters(selectedGroups, kanaMap);
+  const kanaGroups =
+    selectedGroups.length > 0 ? selectedGroups : getInitialKanaGroups();
+
+  const allCharacters = getAllCharacters(kanaGroups, kanaMap);
 
   if (allCharacters.length === 0) {
     throw console.error("Couldn't find any characters.");

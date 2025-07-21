@@ -3,36 +3,46 @@ import type {
   KanaMap,
   KanaSetting,
   KanaSystemSettingsKey,
+  KanaTableSettingsKey,
 } from "../types/types";
-import { HiraganaData } from "./hiraganaData";
-import { KatakanaData } from "./katakanaData";
+import { getHiraganaData, HiraganaData } from "./hiraganaData";
+import { getKatakanaData, KatakanaData } from "./katakanaData";
 
-export const KanaData: KanaMap = { ...HiraganaData, ...KatakanaData };
-
+// TODO: Fix so that tables work per writing system
 export const getKanaData = (
+  tableKeys: Record<KanaTableSettingsKey, KanaSetting>,
   systemKeys: Record<KanaSystemSettingsKey, KanaSetting>
 ): KanaMap => {
   const KanaData: KanaMap = {};
 
+  const hiraganaData = getHiraganaData(tableKeys);
+  const katakanaData = getKatakanaData(tableKeys);
+
   if (systemKeys.hiragana.checked) {
-    Object.keys(HiraganaData).map(
+    Object.keys(hiraganaData).map(
       (kanaKey) =>
         (KanaData[kanaKey as KanaGroupKey] = [
           ...(KanaData[kanaKey as KanaGroupKey] ?? []),
-          ...(HiraganaData[kanaKey as KanaGroupKey] ?? []),
+          ...(hiraganaData[kanaKey as KanaGroupKey] ?? []),
         ])
     );
   }
   if (systemKeys.katakana.checked) {
-    Object.keys(KatakanaData).map(
+    Object.keys(katakanaData).map(
       (kanaKey) =>
         (KanaData[kanaKey as KanaGroupKey] = [
           ...(KanaData[kanaKey as KanaGroupKey] ?? []),
-          ...(KatakanaData[kanaKey as KanaGroupKey] ?? []),
+          ...(katakanaData[kanaKey as KanaGroupKey] ?? []),
         ])
     );
   }
-  console.log(KanaData);
+  console.log("KanaData", KanaData);
 
   return KanaData;
+};
+
+export const KanaData: KanaMap = { ...HiraganaData, ...KatakanaData };
+
+export const getInitialKanaGroups = (): KanaGroupKey[] => {
+  return Object.keys(KanaData) as KanaGroupKey[]; // Or any logic you need
 };
