@@ -5,8 +5,8 @@ import type {
   KanaSystemSettingsKey,
   KanaTableSettingsKey,
 } from "../types/types";
-import { getHiraganaData, HiraganaData } from "./hiraganaData";
-import { getKatakanaData, KatakanaData } from "./katakanaData";
+import { getHiraganaData } from "./hiraganaData";
+import { getKatakanaData } from "./katakanaData";
 
 // TODO: Fix so that tables work per writing system
 export const getKanaData = (
@@ -38,10 +38,4 @@ export const getKanaData = (
   }
 
   return KanaData;
-};
-
-export const KanaData: KanaMap = { ...HiraganaData, ...KatakanaData };
-
-export const getInitialKanaGroups = (): KanaGroupKey[] => {
-  return Object.keys(KanaData) as KanaGroupKey[]; // Or any logic you need
 };

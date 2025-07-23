@@ -69,3 +69,11 @@ export type KanaSetting = {
   label: string;
   checked?: boolean;
 };
+
+export type QuizMode = "text-input" | "multiple-choice";
+
+export type QuizModeOption = { id: QuizMode; label: string };
+
+export type QuizModeOptions = {
+  [key in QuizMode]: QuizModeOption;
+};

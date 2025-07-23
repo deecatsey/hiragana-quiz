@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { KanaGroupKey, Score } from "../types/types";
+import type { KanaGroupKey, QuizMode, Score } from "../types/types";
 import type {
   KanaTableSettingsPayload,
   KanaSettingsState,
@@ -20,8 +20,21 @@ export const initialKanaSettings: KanaSettingsState = {
   },
 };
 
+// TODO: REFACTOR
+/**
+ * STATE = {
+ *  hiragana : [selectedGroups],
+ *  katakana : [selectedGroups]
+ * }
+ */
+
+// TODO: Make all active by default, toggle all tables (diacritics etc) when changing setting
+// checkmark on visible by default
+// add "SELECT ALL" option
+
 const initialState: KanaState = {
-  quizMode: false,
+  quizMode: "multiple-choice",
+  quizActive: false,
   selectedKanaGroups: [], //getInitialKanaGroups(),
   score: { correct: 0, wrong: 0 },
   settings: initialKanaSettings,
@@ -31,8 +44,11 @@ export const kanaSlice = createSlice({
   name: "kana",
   initialState,
   reducers: {
-    setQuizMode: (state, action: PayloadAction<boolean>) => {
+    setQuizMode: (state, action: PayloadAction<QuizMode>) => {
       state.quizMode = action.payload;
+    },
+    setQuizActive: (state, action: PayloadAction<boolean>) => {
+      state.quizActive = action.payload;
     },
     addKanaGroup: (state, action: PayloadAction<KanaGroupKey>) => {
       state.selectedKanaGroups.push(action.payload);
@@ -75,6 +91,7 @@ export const kanaSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   setQuizMode,
+  setQuizActive,
   addKanaGroup,
   removeKanaGroup,
   clearGroups,

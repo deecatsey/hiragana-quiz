@@ -1,14 +1,14 @@
 import { Fab, Typography } from "@mui/material";
 import { store } from "../../app/store";
 import { useDispatch } from "react-redux";
-import { resetScore, setQuizMode } from "../../app/kanaSlice";
+import { resetScore, setQuizActive } from "../../app/kanaSlice";
 
 export default function StartQuizButton() {
   const dispatch = useDispatch();
   const onClick = () => {
     console.log("Start quiz", store.getState().kana.selectedKanaGroups);
 
-    dispatch(setQuizMode(true));
+    dispatch(setQuizActive(true));
     dispatch(resetScore());
   };
 

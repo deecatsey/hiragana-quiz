@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import { HiraganaTable } from "../components/start-quiz/HiraganaTable";
 import StartQuizButton from "../components/start-quiz/StartQuizButton";
-import SelectSettings from "../components/start-quiz/SelectSettings";
+import SelectSettings from "../components/settings/SelectSettings";
 import { KatakanaTable } from "../components/start-quiz/KatakanaTable";
 import { useSelector } from "react-redux";
 import type { RootState } from "../app/store";

@@ -1,7 +1,7 @@
 import { Fab, Grid, Stack, Typography } from "@mui/material";
 import type { ReactNode } from "react";
 import type { KanaQuestion } from "../types/types";
-import AnswerButton from "../components/quiz/AnswerButton";
+import AnswerButton from "../components/quiz/text-input/multiple-choice/AnswerButton";
 
 export type QuizPageLayoutProps = {
   currentQuestion: KanaQuestion | null;

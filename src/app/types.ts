@@ -4,6 +4,7 @@ import type {
   KanaTableSettingsKey,
   Score,
   KanaSystemSettingsKey,
+  QuizMode,
 } from "../types/types";
 
 export type KanaTableSettingsPayload = {
@@ -24,7 +25,8 @@ export type KanaSettingsState = {
 };
 
 export interface KanaState {
-  quizMode: boolean;
+  quizMode: QuizMode;
+  quizActive: boolean;
   selectedKanaGroups: KanaGroupKey[];
   score: Score;
   settings: KanaSettingsState;

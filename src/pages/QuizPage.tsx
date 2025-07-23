@@ -5,7 +5,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { generateQuestion } from "../utils/quiz-utils";
 import type { RootState } from "../app/store";
 import { Fab } from "@mui/material";
-import { clearGroups, setQuizMode, updateScore } from "../app/kanaSlice";
+import { clearGroups, setQuizActive, updateScore } from "../app/kanaSlice";
 import { useCallback, useEffect, useState } from "react";
 import type { KanaQuestion } from "../types/types";
 import FeedbackBar from "../components/quiz/FeedbackBar";
@@ -47,7 +47,7 @@ export default function QuizPage() {
   };
 
   const onClickBack = () => {
-    dispatch(setQuizMode(false));
+    dispatch(setQuizActive(false));
     dispatch(clearGroups());
   };
 

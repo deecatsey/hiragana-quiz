@@ -48,7 +48,7 @@ export default function KanaRowLayout({
         spacing={1}
       >
         {children}
-        <Typography variant="h6">Row: {rowName}</Typography>
+        <Typography variant="h4">{rowName}</Typography>
         <Stack direction="row" flexWrap="wrap" p={1}>
           {kanaRow}
         </Stack>
