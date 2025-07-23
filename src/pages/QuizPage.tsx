@@ -1,20 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import { generateQuestion } from "../utils/quiz-utils";
 import type { RootState } from "../app/store";
-import { Fab } from "@mui/material";
 import { clearGroups, setQuizActive, updateScore } from "../app/kanaSlice";
 import { useCallback, useEffect, useState } from "react";
 import type { KanaQuestion } from "../types/types";
 import FeedbackBar from "../components/quiz/FeedbackBar";
-import ScoreIndicator from "../components/quiz/ScoreIndicator";
-import QuizPageLayout from "./QuizPageLayout";
+
 import { getKanaData } from "../resources/kanaData";
+import QuizMultipleChoice from "./QuizMultipleChoice";
+import QuizTextInput from "./QuizTextInput";
 
 export default function QuizPage() {
   const dispatch = useDispatch();
+
+  const quizMode = useSelector((state: RootState) => state.kana.quizMode);
+
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
   const selectedKanaGroups = useSelector(
@@ -74,28 +75,26 @@ export default function QuizPage() {
     <FeedbackBar kana={kana} choice={selectedAnswer} correctAnswer={answer} />
   );
 
-  const nextButton = (
-    <Fab
-      variant="extended"
-      color="primary"
-      onClick={onClickNext}
-      sx={selectedAnswer ? { visibility: "visible" } : { visibility: "hidden" }}
-    >
-      <ArrowForwardIcon />
-      Next
-    </Fab>
-  );
+  const quizAnswerInput =
+    quizMode === "multiple-choice" ? (
+      <QuizMultipleChoice
+        currentQuestion={currentQuestion}
+        disableButtons={selectedAnswer !== null}
+        onSelectAnswer={onSelectAnswer}
+        onClickNext={onClickNext}
+        onClickBack={onClickBack}
+        feedbackBar={feedbackBar}
+      />
+    ) : (
+      <QuizTextInput
+        currentQuestion={currentQuestion}
+        disableButtons={selectedAnswer !== null}
+        onSelectAnswer={onSelectAnswer}
+        onClickNext={onClickNext}
+        onClickBack={onClickBack}
+        feedbackBar={feedbackBar}
+      />
+    );
 
-  return (
-    <QuizPageLayout
-      currentQuestion={currentQuestion}
-      onClickBack={onClickBack}
-      onClickBackIcon={<ArrowBackIcon />}
-      scoreIndicator={<ScoreIndicator />}
-      onSelectAnswer={onSelectAnswer}
-      feedbackBar={feedbackBar}
-      nextButton={nextButton}
-      disableButtons={selectedAnswer !== null}
-    />
-  );
+  return quizAnswerInput;
 }

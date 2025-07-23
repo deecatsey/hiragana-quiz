@@ -1,50 +1,30 @@
 import { Fab, Grid, Stack, Typography } from "@mui/material";
 import type { ReactNode } from "react";
-import type { KanaQuestion } from "../types/types";
-import AnswerButton from "../components/quiz/text-input/multiple-choice/AnswerButton";
+
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export type QuizPageLayoutProps = {
-  currentQuestion: KanaQuestion | null;
+  kana: string;
   onClickBack: () => void;
-  onClickBackIcon: ReactNode;
   scoreIndicator: ReactNode;
   feedbackBar: ReactNode;
   nextButton: ReactNode;
-  onSelectAnswer: (choice: string) => void;
-  disableButtons: boolean;
+  answerComponent: ReactNode;
 };
 
 export default function QuizPageLayout({
-  currentQuestion,
+  kana,
   onClickBack,
-  onClickBackIcon,
   scoreIndicator,
-  onSelectAnswer,
+  answerComponent,
   feedbackBar,
   nextButton,
-  disableButtons,
 }: QuizPageLayoutProps) {
-  const { kana, options } = currentQuestion || {
-    kana: "",
-    answer: "",
-    options: [],
-  };
-
-  const choices = options.map((option) => (
-    <Grid key={`answer-${option}`} size={4}>
-      <AnswerButton
-        option={option}
-        onAnswer={onSelectAnswer}
-        disabled={disableButtons}
-      />
-    </Grid>
-  ));
-
   return (
     <Stack spacing={3}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Fab variant="extended" color="secondary" onClick={onClickBack}>
-          {onClickBackIcon}
+          <ArrowBackIcon />
           Back to Selection
         </Fab>
         {scoreIndicator}
@@ -52,7 +32,7 @@ export default function QuizPageLayout({
 
       <Typography variant="h1">{kana}</Typography>
       <Grid container spacing={2}>
-        {choices}
+        {answerComponent}
       </Grid>
 
       {feedbackBar}
