@@ -61,7 +61,7 @@ export const kanaSlice = createSlice({
     clearGroups: (state) => {
       state.selectedKanaGroups = [];
     },
-    toggleKanaTableSetting: (
+    setKanaTableSetting: (
       state,
       action: PayloadAction<KanaTableSettingsPayload>
     ) => {
@@ -69,7 +69,7 @@ export const kanaSlice = createSlice({
       if (!key) return;
       state.settings.tables[key].checked = !!checked;
     },
-    toggleKanaSystemSetting: (
+    setKanaSystemSetting: (
       state,
       action: PayloadAction<KanaSystemSettingsPayload>
     ) => {
@@ -95,8 +95,8 @@ export const {
   addKanaGroup,
   removeKanaGroup,
   clearGroups,
-  toggleKanaTableSetting,
-  toggleKanaSystemSetting,
+  setKanaTableSetting,
+  setKanaSystemSetting,
   updateScore,
   resetScore,
 } = kanaSlice.actions;

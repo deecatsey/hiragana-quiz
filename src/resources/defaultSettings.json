@@ -1,0 +1,9 @@
+{
+  "quiz-mode": "multiple-choice",
+  "kana-systems": { "hiragana": true, "katakana": false },
+  "kana-tables": {
+    "gojuon": true,
+    "diacritics": true,
+    "diphtongs": false
+  }
+}

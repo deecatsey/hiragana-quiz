@@ -16,14 +16,10 @@ export function KanaSettingComponent({
     toggleSetting();
   };
 
-  const onChange = () => {
-    toggleSetting();
-  };
-
   return (
     <MenuItem>
       <Stack direction="row" alignItems="center" onClick={setSetting}>
-        <Switch checked={checked || false} onChange={onChange} />
+        <Switch checked={checked || false} />
         <Typography variant="body1">{label}</Typography>
       </Stack>
     </MenuItem>

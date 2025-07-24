@@ -11,8 +11,6 @@ import { getKanaData } from "../resources/kanaData";
 import QuizMultipleChoice from "./QuizMultipleChoice";
 import QuizTextInput from "./QuizTextInput";
 
-import { Keyboard } from "@capacitor/keyboard";
-
 export default function QuizPage() {
   const dispatch = useDispatch();
 
@@ -42,9 +40,6 @@ export default function QuizPage() {
   useEffect(() => {
     const currQuestion = generateQuestion(selectedKanaGroups, kanaMap);
     setCurrentQuestion(currQuestion);
-
-    if (quizMode !== "text-input") return;
-    Keyboard.show();
   }, []);
 
   const { kana, answer } = currentQuestion || {

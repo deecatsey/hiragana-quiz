@@ -1,6 +1,14 @@
 import { useCallback } from "react";
 import { Preferences } from "@capacitor/preferences";
-import type { AppSetting } from "../types/types";
+import type {
+  AppSetting,
+  AppSettings,
+  AppSystemSettings,
+  AppTableSettings,
+  NestedAppSetting,
+} from "../types/types";
+import defaultSettingsJSON from "../resources/defaultSettings.json";
+
 /**
  * Apple Privacy Manifest Requirements
 
@@ -16,18 +24,49 @@ For this plugin, the required dictionary key is NSPrivacyAccessedAPICategoryUser
 SEE: https://capacitorjs.com/docs/apis/preferences
  */
 export const useAppSettings = (settingsKey: string) => {
-  const loadSettings = useCallback(async (): Promise<string | undefined> => {
-    const result = await Preferences.get({ key: settingsKey });
-    return result.value ? JSON.parse(result.value) : undefined;
-  }, [settingsKey]);
+  const defaultSettings = defaultSettingsJSON as AppSettings;
 
-  const saveSettings = async (newSettings: AppSetting) => {
+  const loadSettings = useCallback(async (): Promise<
+    string | AppTableSettings | AppSystemSettings | undefined
+  > => {
+    ////
+    // Preferences.clear().then(() => console.log("Preferences cleared"));
+    ///
+
+    const { value } = await Preferences.get({ key: settingsKey });
+
+    console.log("LOAD SETTINGS", value);
+    if (value) return JSON.parse(value);
+    const defaultSetting = defaultSettings[settingsKey as keyof AppSettings];
+    return defaultSetting;
+  }, [settingsKey, defaultSettings]);
+
+  const saveSettings = useCallback(async (newSettings: AppSetting) => {
     const { key, value } = newSettings;
+
     await Preferences.set({
       key,
       value: JSON.stringify(value),
     });
-  };
+  }, []);
 
-  return [loadSettings, saveSettings] as const;
+  const saveNestedSetting = useCallback(
+    async (newSettings: NestedAppSetting) => {
+      const { key, subKey, value } = newSettings;
+
+      const stored = await Preferences.get({ key });
+      const settings = stored.value
+        ? JSON.parse(stored.value)
+        : defaultSettings[settingsKey as keyof AppSettings];
+
+      settings[subKey] = value;
+      await Preferences.set({
+        key,
+        value: JSON.stringify(settings),
+      });
+    },
+    [settingsKey, defaultSettings]
+  );
+
+  return { loadSettings, saveSettings, saveNestedSetting } as const;
 };

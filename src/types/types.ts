@@ -78,6 +78,34 @@ export type QuizModeOptions = {
   [key in QuizMode]: QuizModeOption;
 };
 
-export type AppSettingValue = boolean | QuizMode | string;
+export type KanaTableSetting = {
+  key: KanaTableSettingsKey;
+  value: boolean;
+};
+
+export type AppSettingValue = boolean | QuizMode | KanaTableSetting | string;
 
 export type AppSetting = { key: string; value: AppSettingValue };
+
+export type NestedAppSetting = {
+  key: string;
+  subKey: string;
+  value: AppSettingValue;
+};
+
+export type AppSystemSettings = {
+  hiragana: boolean;
+  katakana: boolean;
+};
+
+export type AppTableSettings = {
+  gojuon: boolean;
+  diacritics: boolean;
+  diphtongs: boolean;
+};
+
+export type AppSettings = {
+  "quiz-mode": string;
+  "kana-systems": AppSystemSettings;
+  "kana-tables": AppTableSettings;
+};

@@ -10,7 +10,7 @@ import { useAppSettings } from "../../hooks/useAppSettings";
 
 export default function QuizModeRadio() {
   const dispatch = useDispatch();
-  const [loadSettings, setSettings] = useAppSettings("quiz-mode");
+  const { loadSettings, saveSettings } = useAppSettings("quiz-mode");
   const quizMode = useSelector((state: RootState) => state.kana.quizMode);
 
   // Load persisted setting once and hydrate Redux
@@ -28,9 +28,9 @@ export default function QuizModeRadio() {
         target: { value },
       } = e;
       dispatch(setQuizMode(value as QuizMode));
-      await setSettings({ key: "quiz-mode", value });
+      await saveSettings({ key: "quiz-mode", value });
     },
-    [dispatch, setSettings]
+    [dispatch, saveSettings]
   );
 
   const modes = Object.values(QuizModes).map((mode: QuizModeOption) => (

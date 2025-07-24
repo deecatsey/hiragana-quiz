@@ -26,7 +26,7 @@ export function HiraganaTable() {
   // ));
 
   const tables = Object.entries(kanaSettings).map(([settingsKey, value]) => {
-    console.log(settingsKey, value.label, value.checked);
+    // console.log(settingsKey, value.label, value.checked);
 
     if (!checkedSettingsKeys.includes(settingsKey as KanaTableSettingsKey))
       return null;
