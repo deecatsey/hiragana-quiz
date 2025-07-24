@@ -12,7 +12,7 @@ export const initialKanaSettings: KanaSettingsState = {
   tables: {
     gojuon: { label: "Gojuon", checked: true },
     diacritics: { label: "Gojuon diacritics" },
-    diphtongs: { label: "Diphtongs" },
+    diagraphs: { label: "diagraphs" },
   },
   systems: {
     hiragana: { label: "Hiragana", checked: true },
