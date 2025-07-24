@@ -29,9 +29,22 @@ export type GojuonBasic =
 
 export type GojuonDiacritics = "ga" | "za" | "da" | "ba" | "pa";
 
+export type Diagraphs =
+  | "kya"
+  | "sha"
+  | "cha"
+  | "nya"
+  | "hya"
+  | "mya"
+  | "rya"
+  | "gya"
+  | "ja"
+  | "bya"
+  | "pya";
+
 export type Hatsuon = "n";
 
-export type KanaGroupKey = GojuonBasic | GojuonDiacritics | Hatsuon;
+export type KanaGroupKey = GojuonBasic | GojuonDiacritics | Hatsuon | Diagraphs;
 
 export type KanaMapBasic = {
   [key in GojuonBasic]: KanaEntry[];
@@ -61,7 +74,7 @@ export type Score = {
   wrong: number;
 };
 
-export type KanaTableSettingsKey = "gojuon" | "diacritics" | "diphtongs";
+export type KanaTableSettingsKey = "gojuon" | "diacritics" | "diagraphs";
 
 export type KanaSystemSettingsKey = "hiragana" | "katakana";
 
@@ -101,7 +114,7 @@ export type AppSystemSettings = {
 export type AppTableSettings = {
   gojuon: boolean;
   diacritics: boolean;
-  diphtongs: boolean;
+  diagraphs: boolean;
 };
 
 export type AppSettings = {

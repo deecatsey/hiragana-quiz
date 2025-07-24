@@ -115,10 +115,68 @@ export const HatsuonKatakana: KanaMap = {
   n: [{ kana: "ン", romanji: "n" }],
 };
 
+export const DigraphsKatakana: KanaMap = {
+  kya: [
+    { kana: "キャ", romanji: "kya" },
+    { kana: "キュ", romanji: "kyu" },
+    { kana: "キョ", romanji: "kyo" },
+  ],
+  sha: [
+    { kana: "シャ", romanji: "sha" },
+    { kana: "シュ", romanji: "shu" },
+    { kana: "ショ", romanji: "sho" },
+  ],
+  cha: [
+    { kana: "チャ", romanji: "cha" },
+    { kana: "チュ", romanji: "chu" },
+    { kana: "チョ", romanji: "cho" },
+  ],
+  nya: [
+    { kana: "ニャ", romanji: "nya" },
+    { kana: "ニュ", romanji: "nyu" },
+    { kana: "ニョ", romanji: "nyo" },
+  ],
+  hya: [
+    { kana: "ヒャ", romanji: "hya" },
+    { kana: "ヒュ", romanji: "hyu" },
+    { kana: "ヒョ", romanji: "hyo" },
+  ],
+  mya: [
+    { kana: "ミャ", romanji: "mya" },
+    { kana: "ミュ", romanji: "myu" },
+    { kana: "ミョ", romanji: "myo" },
+  ],
+  rya: [
+    { kana: "リャ", romanji: "rya" },
+    { kana: "リュ", romanji: "ryu" },
+    { kana: "リョ", romanji: "ryo" },
+  ],
+  gya: [
+    { kana: "ギャ", romanji: "gya" },
+    { kana: "ギュ", romanji: "gyu" },
+    { kana: "ギョ", romanji: "gyo" },
+  ],
+  ja: [
+    { kana: "ジャ", romanji: "ja" },
+    { kana: "ジュ", romanji: "ju" },
+    { kana: "ジョ", romanji: "jo" },
+  ],
+  bya: [
+    { kana: "ビャ", romanji: "bya" },
+    { kana: "ビュ", romanji: "byu" },
+    { kana: "ビョ", romanji: "byo" },
+  ],
+  pya: [
+    { kana: "ピャ", romanji: "pya" },
+    { kana: "ピュ", romanji: "pyu" },
+    { kana: "ピョ", romanji: "pyo" },
+  ],
+};
+
 export const KatakanaLookup: { [key in KanaTableSettingsKey]: KanaMap } = {
   gojuon: GojuonKatakana,
   diacritics: GojuonDiacriticsKatakana,
-  diphtongs: HatsuonKatakana,
+  diagraphs: DigraphsKatakana,
 };
 
 export const KatakanaData: KanaMap = { ...GojuonKatakana, ...HatsuonKatakana };
