@@ -4,6 +4,6 @@
   "kana-tables": {
     "gojuon": true,
     "diacritics": true,
-    "diphtongs": false
+    "diagraphs": false
   }
 }
