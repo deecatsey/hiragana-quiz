@@ -1,6 +1,6 @@
 import { Fab, Grid, Stack, Typography } from "@mui/material";
 import type { ReactNode } from "react";
-
+import { Capacitor } from "@capacitor/core";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export type QuizPageLayoutProps = {
@@ -20,24 +20,30 @@ export default function QuizPageLayout({
   feedbackBar,
   nextButton,
 }: QuizPageLayoutProps) {
+  const isNative = Capacitor.isNativePlatform();
+  // const platform = Capacitor.getPlatform(); // 'ios' | 'android' | 'web'
+
+  const appSx = isNative ? { height: "100vh" } : {};
+
   return (
-    <Stack spacing={3}>
+    <Stack sx={appSx}>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Fab variant="extended" color="secondary" onClick={onClickBack}>
           <ArrowBackIcon />
           Back to Selection
         </Fab>
-        {scoreIndicator}
       </Stack>
+      <Stack spacing={5} mt="30%">
+        <Stack alignItems="end">{scoreIndicator}</Stack>
+        <Typography variant="h1">{kana}</Typography>
+        <Grid container spacing={2}>
+          {answerComponent}
+        </Grid>
 
-      <Typography variant="h1">{kana}</Typography>
-      <Grid container spacing={2}>
-        {answerComponent}
-      </Grid>
-
-      {feedbackBar}
-      <Stack direction="row" justifyContent="center">
-        {nextButton}
+        {feedbackBar}
+        <Stack direction="row" justifyContent="center">
+          {nextButton}
+        </Stack>
       </Stack>
     </Stack>
   );

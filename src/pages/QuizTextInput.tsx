@@ -30,21 +30,20 @@ export default function QuizTextInput({
   };
 
   const [disableInput, setDisableInput] = useState<boolean>(false);
+  const [disableCheckButton, setDisableCheckButton] = useState<boolean>(true);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!inputRef.current) return;
     inputRef.current.focus();
+    setDisableCheckButton(true);
   }, [kana]);
 
   const sendInputValue = () => {
-    /**
-     * TODO: handle empty input field
-     */
-
     if (!inputRef.current) return;
     const value = inputRef.current.value;
+    if (!value) return;
     onSelectAnswer(value.toLowerCase());
     setDisableInput(true);
   };
@@ -58,12 +57,21 @@ export default function QuizTextInput({
     sendInputValue();
   };
 
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = e;
+    const disableCheckBtn = value === "";
+    setDisableCheckButton(disableCheckBtn);
+  };
+
   const inputComponent = (
     <Stack direction="row" alignItems="center" spacing={2}>
       <TextField
         inputRef={inputRef}
         disabled={disableInput}
         onKeyDown={onKeyDown}
+        onChange={onChange}
         slotProps={{
           htmlInput: {
             style: {
@@ -78,7 +86,7 @@ export default function QuizTextInput({
       <Fab
         variant="extended"
         color="primary"
-        disabled={disableInput}
+        disabled={disableInput || disableCheckButton}
         onClick={onClick}
       >
         Check answer
