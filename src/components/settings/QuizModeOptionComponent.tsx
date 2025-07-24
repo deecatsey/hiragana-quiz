@@ -1,4 +1,4 @@
-import { FormControlLabel, Radio } from "@mui/material";
+import { FormControlLabel, MenuItem, Radio, Stack } from "@mui/material";
 
 export type QuizModeOptionComponentProps = {
   label: string;
@@ -18,11 +18,16 @@ export default function QuizModeOptionComponent({
   //   };
 
   return (
-    <FormControlLabel
-      key={`quiz-option-${id}`}
-      value={id}
-      control={<Radio checked={checked} onChange={onChange} />}
-      label={label}
-    />
+    <MenuItem>
+      <Stack direction="row" alignItems="center" /* onClick={onChange}*/>
+        <FormControlLabel
+          key={`quiz-option-${id}`}
+          value={id}
+          control={<Radio checked={checked} onChange={onChange} />}
+          label={label}
+          sx={{ pl: "12px" }}
+        />
+      </Stack>
+    </MenuItem>
   );
 }

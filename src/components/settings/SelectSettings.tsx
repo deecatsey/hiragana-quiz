@@ -16,7 +16,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { KanaTableSettingComponent } from "./KanaTableSettingComponent";
 import { KanaSystemSettingComponent } from "./KanaSystemSettingComponent";
-import QuizMode from "./QuizMode";
+import QuizModeRadio from "./QuizMode";
 
 export default function SelectSettings() {
   const [open, setOpen] = useState<boolean>(false);
@@ -68,11 +68,13 @@ export default function SelectSettings() {
           <CancelIcon />
         </IconButton>
         <Stack alignItems="start" justifyContent="center" height="100%">
-          <Typography>Quiz Mode:</Typography>
-          <QuizMode />
-          <Divider />
           <Stack alignItems="center" justifyContent="center" width="100%">
-            <Typography variant="h6">Include:</Typography>
+            <Typography variant="h6">Quiz Mode:</Typography>
+          </Stack>
+          <QuizModeRadio />
+          <Divider flexItem sx={{ m: 5 }} />
+          <Stack alignItems="center" justifyContent="center" width="100%">
+            <Typography variant="h6">Include Kana:</Typography>
           </Stack>
           {systemSettings}
           {tableSettings}

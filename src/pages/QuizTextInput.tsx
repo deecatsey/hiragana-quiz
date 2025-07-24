@@ -1,8 +1,8 @@
-import { TextField } from "@mui/material";
+import { Stack, TextField } from "@mui/material";
 import { Fab } from "@mui/material";
 import QuizPageLayout from "./QuizPageLayout";
 import type { KanaQuestion } from "../types/types";
-import { useRef, type ReactNode } from "react";
+import React, { useEffect, useRef, useState, type ReactNode } from "react";
 import ScoreIndicator from "../components/quiz/ScoreIndicator";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
@@ -29,37 +29,67 @@ export default function QuizTextInput({
     options: [],
   };
 
-  /**
-   * local text state
-   * diable field when answered
-   */
+  const [disableInput, setDisableInput] = useState<boolean>(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const onChange = (e) => {
-    const {
-      target: { value },
-    } = e;
-    console.log(value);
+  useEffect(() => {
+    if (!inputRef.current) return;
+    inputRef.current.focus();
+  }, [kana]);
+
+  const sendInputValue = () => {
+    /**
+     * TODO: handle empty input field
+     */
+
+    if (!inputRef.current) return;
+    const value = inputRef.current.value;
+    onSelectAnswer(value.toLowerCase());
+    setDisableInput(true);
   };
 
   const onClick = () => {
-    if (!inputRef.current) return;
-    const value = inputRef.current.value;
-    console.log(inputRef.current);
-    onSelectAnswer(value);
+    sendInputValue();
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key !== "Enter") return;
+    sendInputValue();
   };
 
   const inputComponent = (
-    <>
-      <TextField inputRef={inputRef} onChange={onChange} />
-      <Fab onClick={onClick}>Check answer</Fab>
-    </>
+    <Stack direction="row" alignItems="center" spacing={2}>
+      <TextField
+        inputRef={inputRef}
+        disabled={disableInput}
+        onKeyDown={onKeyDown}
+        slotProps={{
+          htmlInput: {
+            style: {
+              textTransform: "uppercase",
+              fontSize: "1.5em",
+              width: "6em",
+              padding: "1em",
+            },
+          },
+        }}
+      />
+      <Fab
+        variant="extended"
+        color="primary"
+        disabled={disableInput}
+        onClick={onClick}
+      >
+        Check answer
+      </Fab>
+    </Stack>
   );
 
   const onClickNextButton = () => {
     if (!inputRef.current) return;
     inputRef.current.value = "";
+    setDisableInput(false);
     onClickNext();
   };
 

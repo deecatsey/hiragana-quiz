@@ -22,7 +22,7 @@ export default function FeedbackBar({
   return (
     <Alert variant="filled" severity={severity} sx={feedbackSX}>
       <Stack direction="row" spacing={2}>
-        {`${feedbackText} ${kana} = ${correctAnswer}`}
+        {`${feedbackText} ${kana} = ${correctAnswer.toUpperCase()}`}
       </Stack>
     </Alert>
   );

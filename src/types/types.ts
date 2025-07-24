@@ -77,3 +77,7 @@ export type QuizModeOption = { id: QuizMode; label: string };
 export type QuizModeOptions = {
   [key in QuizMode]: QuizModeOption;
 };
+
+export type AppSettingValue = boolean | QuizMode | string;
+
+export type AppSetting = { key: string; value: AppSettingValue };
