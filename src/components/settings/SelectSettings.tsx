@@ -10,10 +10,10 @@ import type {
   KanaTableSettingsKey,
 } from "../../types/types";
 import { initialKanaSettings } from "../../app/kanaSlice";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { useState } from "react";
-import SettingsIcon from "@mui/icons-material/Settings";
-import CancelIcon from "@mui/icons-material/Cancel";
+import MenuIcon from "@mui/icons-material/Menu";
 import { KanaTableSettingComponent } from "./KanaTableSettingComponent";
 import { KanaSystemSettingComponent } from "./KanaSystemSettingComponent";
 import QuizModeRadio from "./QuizMode";
@@ -45,16 +45,19 @@ export default function SelectSettings() {
     }
   );
 
-  const settingsButtonSx = {
-    position: "fixed",
-    right: 0,
-    top: 0,
-  };
-
   return (
     <>
-      <IconButton onClick={() => setOpen(true)} sx={settingsButtonSx}>
-        <SettingsIcon />
+      <IconButton
+        size="large"
+        onClick={() => setOpen(true)}
+        sx={{
+          position: "absolute",
+          right: "2rem",
+          top: "2rem",
+          "&:focus": { outline: "none" },
+        }}
+      >
+        <MenuIcon fontSize="inherit" />
       </IconButton>
 
       <SwipeableDrawer
@@ -62,11 +65,12 @@ export default function SelectSettings() {
         open={open}
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
-        // hideBackdrop
       >
-        <IconButton onClick={() => setOpen(false)} sx={settingsButtonSx}>
-          <CancelIcon />
-        </IconButton>
+        <Stack direction="row" justifyContent="end" p={2}>
+          <IconButton size="large" onClick={() => setOpen(false)}>
+            <CloseIcon fontSize="inherit" />
+          </IconButton>
+        </Stack>
         <Stack alignItems="start" justifyContent="center" height="100%">
           <Stack alignItems="center" justifyContent="center" width="100%">
             <Typography variant="h6">Quiz Mode:</Typography>

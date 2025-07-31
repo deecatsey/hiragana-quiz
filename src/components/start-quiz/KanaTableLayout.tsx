@@ -13,7 +13,7 @@ export default function KanaTableLayout({
   children,
 }: KanaTableLayoutProps) {
   return (
-    <Stack spacing={2} m={2} width="100%" alignItems="start">
+    <Stack spacing={2} m={2} width="100%" alignItems="center">
       <Typography variant="h6">{title}</Typography>
       <Stack spacing={1}>{kanaNodes}</Stack>
 
