@@ -1,5 +1,5 @@
 import { Button, Stack, Typography } from "@mui/material";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import type { KanaEntry } from "../../types/types";
 
 export type KanaRowLayoutProps = {
@@ -18,24 +18,6 @@ export default function KanaRowLayout({
   kanaEntries,
   isSelected,
 }: KanaRowLayoutProps) {
-  const [isVisible, setVisible] = useState(true);
-  const domRef = useRef(null);
-  useEffect(() => {
-    const el = domRef.current;
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => setVisible(entry.isIntersecting));
-    });
-
-    if (!el) return;
-    observer.observe(el);
-
-    //unobserve
-    return () => {
-      if (!el) return;
-      observer.unobserve(el);
-    };
-  }, []);
-
   const kanaRow = kanaEntries.map((char) => (
     <Stack key={`row-layout-${char.romanji}`}>
       <Typography key={char.kana} variant="h2">
@@ -64,8 +46,6 @@ export default function KanaRowLayout({
         alignItems="center"
         justifyContent="start"
         spacing={1}
-        // className={`fade-in-section ${isVisible ? "is-visible" : ""}`}
-        // ref={domRef}
       >
         {children}
         <Typography variant="h4">{rowName}</Typography>

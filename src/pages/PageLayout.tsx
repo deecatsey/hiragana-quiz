@@ -1,4 +1,4 @@
-import { Box, Container, Stack, useTheme } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 import type { ReactNode } from "react";
 
 export type PageLayoutProps = {
@@ -15,7 +15,6 @@ export default function PageLayout({
   children,
   footer,
 }: PageLayoutProps) {
-  const theme = useTheme();
   return (
     <Stack alignItems="center" width="100%">
       <Container
@@ -23,19 +22,6 @@ export default function PageLayout({
         sx={{
           position: "absolute",
           top: 0,
-          zIndex: 1,
-          "&::after": {
-            content: '""',
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: "20px", // scrollbar width
-            height: "8rem",
-            pointerEvents: "none",
-            background: `linear-gradient(to top, rgba(253, 0, 177, 0) 0%, ${theme.palette.grey[900]} 55%)`,
-            transition: "opacity 0.3s ease",
-            zIndex: -1,
-          },
         }}
       >
         <Stack alignItems="center" p={2}>
@@ -50,22 +36,13 @@ export default function PageLayout({
           height: "100vh",
           position: "relative",
           overflow: "auto",
+          maskImage:
+            "linear-gradient(transparent 3%, white 20%, white 80%, transparent 97%)",
         }}
       >
         <Box
           sx={{
             py: "6rem",
-            "&::after": {
-              content: '""',
-              position: "fixed",
-              bottom: 0,
-              left: 0,
-              right: "20px", // scrollbar width
-              height: "10rem",
-              pointerEvents: "none",
-              background: `linear-gradient(rgba(253, 0, 177, 0) 0%, ${theme.palette.grey[900]} 55%)`,
-              transition: "opacity 0.3s ease",
-            },
           }}
         >
           {children}

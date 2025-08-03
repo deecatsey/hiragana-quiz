@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { HiraganaTable } from "../components/start-quiz/HiraganaTable";
 import StartQuizButton from "../components/start-quiz/StartQuizButton";
 import SelectSettings from "../components/settings/SelectSettings";
@@ -27,23 +27,10 @@ export default function SelectionPage() {
       }
       footer={<StartQuizButton />}
     >
-      <Box
-      // className="overflow-scroll-gradient"
-      // sx={{
-      //   pb: 10,
-      //   background: `linear-gradient(yellow 50%, blue 100%)`,
-      //   overflow: "auto",
-      // }}
-      >
-        <Stack
-          // className="overflow-scroll-gradient-scroller"
-          alignItems="center"
-          spacing={4}
-        >
-          {hiragana && <HiraganaTable />}
-          {katakana && <KatakanaTable />}
-        </Stack>
-      </Box>
+      <Stack alignItems="center" spacing={4}>
+        {hiragana && <HiraganaTable />}
+        {katakana && <KatakanaTable />}
+      </Stack>
     </PageLayout>
   );
 }
