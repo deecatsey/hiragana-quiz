@@ -1,5 +1,6 @@
 import {
   Divider,
+  Fab,
   IconButton,
   Stack,
   SwipeableDrawer,
@@ -11,6 +12,7 @@ import type {
 } from "../../types/types";
 import { initialKanaSettings } from "../../app/kanaSlice";
 import CloseIcon from "@mui/icons-material/Close";
+import SendIcon from "@mui/icons-material/Send";
 
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -82,6 +84,19 @@ export default function SelectSettings() {
           </Stack>
           {systemSettings}
           {tableSettings}
+        </Stack>
+        <Stack direction="row" justifyContent="end" p={2}>
+          <Fab
+            disabled
+            variant="extended"
+            color="secondary"
+            onClick={() => setOpen(false)}
+          >
+            <Stack direction="row" alignItems="center" spacing={1}>
+              <Typography variant="body2">{`Leave feedback (TBA)`}</Typography>
+              <SendIcon />
+            </Stack>
+          </Fab>
         </Stack>
       </SwipeableDrawer>
     </>

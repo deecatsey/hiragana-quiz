@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 import { HiraganaTable } from "../components/start-quiz/HiraganaTable";
 import StartQuizButton from "../components/start-quiz/StartQuizButton";
 import SelectSettings from "../components/settings/SelectSettings";
@@ -20,10 +20,14 @@ export default function SelectionPage() {
   return (
     <PageLayout
       header={
-        <>
-          <Typography variant="h2">Know your kana</Typography>{" "}
-          <SelectSettings />
-        </>
+        <Grid container>
+          <Grid>
+            <Typography variant="h2">Know your kana</Typography>
+          </Grid>
+          <Grid>
+            <SelectSettings />
+          </Grid>
+        </Grid>
       }
       footer={<StartQuizButton />}
     >

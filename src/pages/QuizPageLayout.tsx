@@ -54,7 +54,7 @@ export default function QuizPageLayout({
       }
     >
       <Stack alignItems="center">
-        <Stack justifyContent="start" spacing={3}>
+        <Stack justifyContent="start" spacing={3} p={8}>
           <Stack alignItems="end">{scoreIndicator}</Stack>
           <Stack alignItems="center">
             <Typography variant="h1">{kana}</Typography>

@@ -22,6 +22,7 @@ export default function PageLayout({
         sx={{
           position: "absolute",
           top: 0,
+          zIndex: 1,
         }}
       >
         <Stack alignItems="center" p={2}>
@@ -37,7 +38,7 @@ export default function PageLayout({
           position: "relative",
           overflow: "auto",
           maskImage:
-            "linear-gradient(transparent 3%, white 20%, white 80%, transparent 97%)",
+            "linear-gradient(transparent 3%, white 18%, white 87%, transparent 97%)",
         }}
       >
         <Box
