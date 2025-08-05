@@ -1,3 +1,6 @@
+import type { ReactNode } from "react";
+import type { ThemeMode } from "../app/types";
+
 export type HiraganaEntry = {
   hiragana: string;
   romanji: string;
@@ -122,3 +125,5 @@ export type AppSettings = {
   "kana-systems": AppSystemSettings;
   "kana-tables": AppTableSettings;
 };
+
+export type ThemeModeObj = { mode: ThemeMode; icon: ReactNode };

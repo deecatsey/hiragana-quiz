@@ -19,6 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { KanaTableSettingComponent } from "./KanaTableSettingComponent";
 import { KanaSystemSettingComponent } from "./KanaSystemSettingComponent";
 import QuizModeRadio from "./QuizMode";
+import ThemeModeSettings from "./ThemeModeSettings";
 
 export default function SelectSettings() {
   const [open, setOpen] = useState<boolean>(false);
@@ -73,6 +74,7 @@ export default function SelectSettings() {
             <CloseIcon fontSize="inherit" />
           </IconButton>
         </Stack>
+        <ThemeModeSettings />
         <Stack alignItems="start" justifyContent="center" height="100%">
           <Stack alignItems="center" justifyContent="center" width="100%">
             <Typography variant="h6">Quiz Mode:</Typography>

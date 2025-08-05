@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import kanaReducer from "./kanaSlice";
+import themeReducer from "./themeSlice";
 
 export const store = configureStore({
-  reducer: { kana: kanaReducer },
+  reducer: { kana: kanaReducer, theme: themeReducer },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

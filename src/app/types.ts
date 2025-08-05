@@ -31,3 +31,5 @@ export interface KanaState {
   score: Score;
   settings: KanaSettingsState;
 }
+
+export type ThemeMode = "light" | "dark" | "system";
