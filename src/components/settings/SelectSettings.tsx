@@ -69,36 +69,38 @@ export default function SelectSettings() {
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
       >
-        <Stack direction="row" justifyContent="end" p={2}>
-          <IconButton size="large" onClick={() => setOpen(false)}>
-            <CloseIcon fontSize="inherit" />
-          </IconButton>
-        </Stack>
-        <ThemeModeSettings />
-        <Stack alignItems="start" justifyContent="center" height="100%">
-          <Stack alignItems="center" justifyContent="center" width="100%">
-            <Typography variant="h6">Quiz Mode:</Typography>
+        <Stack height="100%" p={2}>
+          <Stack direction="row" justifyContent="end">
+            <IconButton size="large" onClick={() => setOpen(false)}>
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
           </Stack>
-          <QuizModeRadio />
-          <Divider flexItem sx={{ m: 5 }} />
-          <Stack alignItems="center" justifyContent="center" width="100%">
-            <Typography variant="h6">Include Kana:</Typography>
-          </Stack>
-          {systemSettings}
-          {tableSettings}
-        </Stack>
-        <Stack direction="row" justifyContent="end" p={2}>
-          <Fab
-            disabled
-            variant="extended"
-            color="secondary"
-            onClick={() => setOpen(false)}
-          >
-            <Stack direction="row" alignItems="center" spacing={1}>
-              <Typography variant="body2">{`Leave feedback (TBA)`}</Typography>
-              <SendIcon />
+          <ThemeModeSettings />
+          <Stack alignItems="start" justifyContent="center" height="100%">
+            <Stack alignItems="center" justifyContent="center" width="100%">
+              <Typography variant="h6">Quiz Mode:</Typography>
             </Stack>
-          </Fab>
+            <QuizModeRadio />
+            <Divider flexItem sx={{ m: 5 }} />
+            <Stack alignItems="center" justifyContent="center" width="100%">
+              <Typography variant="h6">Include Kana:</Typography>
+            </Stack>
+            {systemSettings}
+            {tableSettings}
+          </Stack>
+          <Stack direction="row" justifyContent="end" p={2}>
+            <Fab
+              disabled
+              variant="extended"
+              color="secondary"
+              onClick={() => setOpen(false)}
+            >
+              <Stack direction="row" alignItems="center" spacing={1}>
+                <Typography variant="body2">{`Leave feedback (TBA)`}</Typography>
+                <SendIcon />
+              </Stack>
+            </Fab>
+          </Stack>
         </Stack>
       </SwipeableDrawer>
     </>

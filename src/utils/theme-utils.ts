@@ -8,7 +8,7 @@ const isValidThemeMode = (value: string | null): value is ThemeMode => {
 };
 
 export const loadThemeMode = createAsyncThunk("theme/loadMode", async () => {
-  const { value } = await Preferences.get({ key: "themeMode" });
+  const { value } = await Preferences.get({ key: "theme-mode" });
   if (!isValidThemeMode(value)) return "system";
   return (value as ThemeMode) ?? "system";
 });
@@ -16,7 +16,8 @@ export const loadThemeMode = createAsyncThunk("theme/loadMode", async () => {
 export const saveThemeMode = createAsyncThunk(
   "theme/saveMode",
   async (mode: ThemeMode) => {
-    await Preferences.set({ key: "themeMode", value: mode });
+    console.log("[THEME] Loaded theme mode:", mode);
+    await Preferences.set({ key: "theme-mode", value: mode });
     return mode;
   }
 );

@@ -12,6 +12,7 @@ import type { ThemeModeObj } from "../../types/types";
 import type { ThemeMode } from "../../app/types";
 import type { AppDispatch, RootState } from "../../app/store";
 import { setThemeMode } from "../../app/themeSlice";
+import { saveThemeMode } from "../../utils/theme-utils";
 
 export default function ThemeModeSettings() {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +20,7 @@ export default function ThemeModeSettings() {
 
   const handleChange = (_: React.MouseEvent<HTMLElement>, mode: ThemeMode) => {
     dispatch(setThemeMode(mode));
+    dispatch(saveThemeMode(mode));
   };
 
   const modes: ThemeModeObj[] = [
